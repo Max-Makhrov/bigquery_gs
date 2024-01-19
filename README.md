@@ -1,6 +1,12 @@
 # BigQuery gs
 For ease of work in `Apps Script`.
 
+## Library
+
+`1EUrnmqZI7rmnI5ztn-qEV8hPoxw3H69PypFOZspFFyTCHUtfYIn9qLuy`
+
+## Usage
+
 ```
 function testLoadScvFromDrive() {
   const csvId = "1Vy2m_FEnbMxwuvy4PNKWvX0ruE0rwPDO";
