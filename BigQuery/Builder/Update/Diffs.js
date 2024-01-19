@@ -3,23 +3,27 @@
  * @prop {String} key
  * @prop {*} previous
  * @prop {*} current
- * 
+ *
  */
 /**
- * 
+ *
  * @param {Object} previousObject
  * @param {Object} currentObject
  * @param {Object} fieldDataTypes `getFieldDataTypesObject_`
- * 
+ *
  * @returns {Array<ObjectDifference>}
  */
-function getFlatObjectsDifferences_(previousObject, currentObject, fieldDataTypes = {}) {
+function getFlatObjectsDifferences_(
+  previousObject,
+  currentObject,
+  fieldDataTypes = {}
+) {
   const typesMap = getCommonDataTypesMap_();
 
   /** @type Array<ObjectDifference> */
   let result = [];
   let eq;
-  let getEq_ = function(curr, pre, key) {
+  let getEq_ = function (curr, pre, key) {
     if (curr === null && pre === "") {
       return true;
     }
@@ -29,37 +33,38 @@ function getFlatObjectsDifferences_(previousObject, currentObject, fieldDataType
     let eq = curr == pre;
     const type = fieldDataTypes[key];
     if (!type) return eq;
-    const _bigReplacement = function(str) {
+    const _bigReplacement = function (str) {
       const res = str
-        .replace(/\\\\n/g, ' ')
-        .replace(/\\n/g, ' ')
-        .replace(/\n/g,' ')
+        .replace(/\\\\n/g, " ")
+        .replace(/\\n/g, " ")
+        .replace(/\n/g, " ")
+        .replace(/\r/g, " ")
         .replace(/''/g, '"')
-        .replace(/\n$/g, '')
-        .replace(/\\/g, '');
-        ;
+        .replace(/\n$/g, "")
+        .replace(/\\/g, "");
       return res;
-    }
+    };
 
     if (!eq && typesMap.string === type && curr !== null && pre !== null) {
       curr = _bigReplacement(curr);
       pre = _bigReplacement(pre);
-      eq = curr == pre
+      eq = curr == pre;
     }
     if ([typesMap.date, typesMap.datetime].indexOf(type) > -1) {
-      const format = "YYY-MM-dd hh:mm:ss"
+      const format = "YYY-MM-dd hh:mm:ss";
       let formatted1 = formatDate_(new Date(curr), format);
       let formatted2 = formatDate_(new Date(pre), format);
       return formatted1 === formatted2;
-    } 
+    }
     if (type === typesMap.boolean) {
       if (pre === null) pre = false;
-      eq = ("" + pre) === ("" + curr);
+      eq = "" + pre === "" + curr;
     }
-    return eq; 
-  }
+    return eq;
+  };
 
-  let current = null, previous = null;
+  let current = null,
+    previous = null;
   for (let key in currentObject) {
     current = currentObject[key];
     previous = previousObject[key];
@@ -75,11 +80,10 @@ function getFlatObjectsDifferences_(previousObject, currentObject, fieldDataType
   return result;
 }
 
-
 /**
  * @param {Array<String>} fieldKeys
  * @param {Array<String>} dataTypes `getCommonDataTypesMap_`
- * 
+ *
  * @returns {Object}
  */
 function getFieldDataTypesObject_(fieldKeys, dataTypes) {
