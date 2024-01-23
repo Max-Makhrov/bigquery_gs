@@ -12,7 +12,7 @@ Add `BigQuery` service.
 
 Using library with identifier `BQ`:
 
-```
+```js
 function test_LoadCsvFromDrive() {
   const csvId = "1Vy2m_FEnbMxwuvy4PNKWvX0ruE0rwPDO";
 
