@@ -1,16 +1,20 @@
-function testLoadScvFromDrive() {
+/**
+ * install library first
+**/
+
+function test_LoadCsvFromDrive() {
   const csvId = "1Vy2m_FEnbMxwuvy4PNKWvX0ruE0rwPDO";
 
   const file = DriveApp.getFileById(csvId);
   const csvContent = file.getBlob().getDataAsString();
   const data = Utilities.parseCsv(csvContent);
 
-  const tableTypes = detectBqDataTypes(data);
-  const tableName = normalizeValue_(file.getName());
+  const tableTypes = BQ.detectBqDataTypes(data);
+  const tableName = BQ.normalizeValue(file.getName());
 
-  const methods = getUpdateMethods();
-  const loadSets = new TableLoadConstructor()
-    .setProject("maxmakhrov")
+  const methods = BQ.getUpdateMethods();
+  const loadSets = new BQ.TableLoadConstructor()
+    .setProject("maxmakhrov") // CHANGE to cloud project id
     .setDataset("test_tables")
     .setTable(tableName)
     .setData(data)
@@ -18,26 +22,26 @@ function testLoadScvFromDrive() {
     .setMethod(methods.rewrite)
     .get();
 
-  loadDataToBigQuery(loadSets);
+  BQ.loadDataToBigQuery(loadSets);
 
 }
 
 
-function test_updateMethods() {
+function test_loadTableToBigQuery() {
   const data = [
     ["name", "age"],
     ["max", 34],
     ["liu", 33]
   ];
-  const types = getDataTypes();
+  const types = BQ.getDataTypes();
   const tableTypes = [
     types.STRING,
     types.INTEGER
   ];
 
-  const methods = getUpdateMethods();
-  const loadSets = new TableLoadConstructor()
-    .setProject("maxmakhrov")
+  const methods = BQ.getUpdateMethods();
+  const loadSets = new BQ.TableLoadConstructor()
+    .setProject("maxmakhrov") // CHANGE to cloud project id
     .setDataset("test_tables")
     .setTable("test")
     .setData(data)
@@ -46,6 +50,6 @@ function test_updateMethods() {
     .get();
 
   
-  loadDataToBigQuery(loadSets);
+  BQ.loadDataToBigQuery(loadSets);
 
 }
