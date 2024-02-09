@@ -14,26 +14,25 @@ Using library with identifier `BQ`:
 
 ```js
 function test_LoadCsvFromDrive() {
+function test_LoadScvFromDrive() {
   const csvId = "1Vy2m_FEnbMxwuvy4PNKWvX0ruE0rwPDO";
 
   const file = DriveApp.getFileById(csvId);
   const csvContent = file.getBlob().getDataAsString();
   const data = Utilities.parseCsv(csvContent);
 
-  const tableTypes = BQ.detectBqDataTypes(data);
-  const tableName = BQ.normalizeValue(file.getName());
+  const tableName = normalizeValue_(file.getName());
 
-  const methods = BQ.getUpdateMethods();
-  const loadSets = new BQ.TableLoadConstructor()
-    .setProject("maxmakhrov") // CHANGE to cloud project id
-    .setDataset("test_tables")
+  const methods = getUpdateMethods();
+  const loadSets = new TableLoadConstructor()
+    .setProject("maxmakhrov") // CHANGE
+    .setDataset("test_tables") // CHANGE
     .setTable(tableName)
     .setData(data)
-    .buildSchema(tableTypes)
     .setMethod(methods.rewrite)
     .get();
 
-  BQ.loadDataToBigQuery(loadSets);
+  loadDataToBigQuery(loadSets);
 
 }
 
