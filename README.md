@@ -3,7 +3,7 @@ For ease of work in `Apps Script`.
 
 ## Install
 
- 1. Install BigQUery service
+ 1. Install BigQuery service
  2. Install library [`1EUrnmqZI7rmnI5ztn-qEV8hPoxw3H69PypFOZspFFyTCHUtfYIn9qLuy`](https://script.google.com/u/0/home/projects/1EUrnmqZI7rmnI5ztn-qEV8hPoxw3H69PypFOZspFFyTCHUtfYIn9qLuy/edit)
 
 ## Usage
