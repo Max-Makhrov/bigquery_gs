@@ -21,10 +21,10 @@ function test_LoadScvFromDrive() {
   const csvContent = file.getBlob().getDataAsString();
   const data = Utilities.parseCsv(csvContent);
 
-  const tableName = normalizeValue_(file.getName());
+  const tableName = BQ.normalizeValue(file.getName());
 
-  const methods = getUpdateMethods();
-  const loadSets = new TableLoadConstructor()
+  const methods = BQ.getUpdateMethods();
+  const loadSets = new BQ.TableLoadConstructor()
     .setProject("maxmakhrov") // CHANGE
     .setDataset("test_tables") // CHANGE
     .setTable(tableName)
@@ -32,7 +32,7 @@ function test_LoadScvFromDrive() {
     .setMethod(methods.rewrite)
     .get();
 
-  loadDataToBigQuery(loadSets);
+  BQ.loadDataToBigQuery(loadSets);
 
 }
 
