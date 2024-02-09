@@ -1,10 +1,10 @@
 # BigQuery gs
 For ease of work in `Apps Script`.
 
-## Library
+## Install
 
-
-[`1EUrnmqZI7rmnI5ztn-qEV8hPoxw3H69PypFOZspFFyTCHUtfYIn9qLuy`](https://script.google.com/u/0/home/projects/1EUrnmqZI7rmnI5ztn-qEV8hPoxw3H69PypFOZspFFyTCHUtfYIn9qLuy/edit)
+ 1. Install BigQUery service
+ 2. Install library [`1EUrnmqZI7rmnI5ztn-qEV8hPoxw3H69PypFOZspFFyTCHUtfYIn9qLuy`](https://script.google.com/u/0/home/projects/1EUrnmqZI7rmnI5ztn-qEV8hPoxw3H69PypFOZspFFyTCHUtfYIn9qLuy/edit)
 
 ## Usage
 
